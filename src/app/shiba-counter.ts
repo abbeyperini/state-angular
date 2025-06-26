@@ -2,9 +2,9 @@ import { Component, signal } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'shiba-counter',
   standalone: true,
-  imports: [FormsModule],
+  selector: 'shiba-counter',
+  imports: [ FormsModule ],
   templateUrl: './shiba-counter.html',
   styleUrl: './shiba-counter.css'
 })
