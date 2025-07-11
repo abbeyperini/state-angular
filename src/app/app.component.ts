@@ -1,18 +1,14 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectShibaCount } from './state/shibas.selectors';
-// import { ShibasService } from './shibas/shibas.service';
+import { selectShibaCount, selectShibaData } from './state/shibas.selectors';
 import { incrementByAmount } from './state/shibas.actions';
-// import { provideStore } from '@ngrx/store';
-// import { provideEffects } from '@ngrx/effects';
-// import * as shibasEffects from './shibas/shibas.effects';
 import { ShibaCounter } from './shibas/shiba-counter';
 import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'app-root',
     template: `
       <main class="main">
-        <shiba-counter [count]="(count$ | async)!" (incrementByAmount)="onIncrementByAmount($event)" />
+        <shiba-counter [count]="(count$ | async)!" [shibaData]="(shibaData$ | async)!" (incrementByAmount)="onIncrementByAmount($event)" />
       </main>
     `,
     imports: [ ShibaCounter, AsyncPipe ],
@@ -22,6 +18,7 @@ export class AppComponent {
   title = 'state-angular';
 
   count$;
+  shibaData$;
 
   onIncrementByAmount(number: number) {
     this.store.dispatch(incrementByAmount({number}));
@@ -29,5 +26,6 @@ export class AppComponent {
 
   constructor(private store: Store) {
     this.count$ = this.store.select(selectShibaCount);
+    this.shibaData$ = this.store.select(selectShibaData);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ShibaData } from '../state/dogApi.model';
 
 @Component({
   selector: 'shiba-counter',
@@ -10,23 +11,28 @@ import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
       <input id='number' type="number" name="number" [formControl]="number"/>
       <button type="submit">Add Shibas</button>
     </form>
-    <!-- @if (shibaData.pending) {
+    @if (shibaData.pending) {
       <p>Pending</p>
     }
     @if (shibaData.error) {
       <p>{{ shibaData.error }}</p>
-    } -->
-    <!-- <div class="shiba-group">
-      @for (shiba of shibas.shibas; track shiba) {
-        <img src="shiba" alt="shiba" key="shiba" />
+    }
+    <div class="shiba-group">
+      @for (shiba of shibaData.shibas; track shiba) {
+        <img [src]="shiba" alt="shiba" />
       }
-    </div> -->
+    </div>
   `,
   styleUrl: './shiba-counter.css',
   imports: [FormsModule, ReactiveFormsModule],
 })
 export class ShibaCounter {
   @Input() count = 0;
+  @Input() shibaData: ShibaData = {
+    error: null,
+    pending: false,
+    shibas: [],
+  };
   @Output() incrementByAmount = new EventEmitter<number>();
   number = new FormControl(0);
 

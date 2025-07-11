@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { DogApiActions } from "./shibas.actions";
+import { DogApiActions } from "./dogApi.actions";
 import { ShibaData } from "./dogApi.model";
 
 export const initialState: ShibaData = {
